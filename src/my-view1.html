@@ -32,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="card">
 
       <template is="dom-repeat" items="{{myCheckbox}}">
-          <paper-checkbox checked={{item.checked}}>[[item.label]]</paper-checkbox>
+          <paper-checkbox checked={{item.checked}} on-change="_onChangeCheckbox">[[item.label]]</paper-checkbox>
       </template>
 
     </div>
@@ -62,6 +62,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 },
               ]
           },
+        }
+      }
+
+      _onChangeCheckbox(e){
+        var count = 0;
+        for(var i in this.myCheckbox){
+          if(this.myCheckbox[i].checked){
+            count++;
+          }
+        }
+        if(count>2){
+          this.set("myCheckbox.0.checked", false);
         }
       }
     }
