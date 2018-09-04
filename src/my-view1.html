@@ -62,10 +62,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 },
               ]
           },
+          loading: {
+            notify: true,
+            type: Boolean,
+          }
         }
       }
 
       _onChangeCheckbox(e){
+        this.loading = true;
         var count = 0;
         for(var i in this.myCheckbox){
           if(this.myCheckbox[i].checked){
@@ -75,6 +80,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if(count>2){
           this.set("myCheckbox.0.checked", false);
         }
+        window.setTimeout(function() {
+          this.loading = false;
+        }.bind(this), 800);
       }
     }
 
