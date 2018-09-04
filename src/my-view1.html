@@ -78,11 +78,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
         if(count>2){
-          this.set("myCheckbox.0.checked", false);
+          var removeIndex = e.model.get("index") + 1;
+          if(removeIndex > 2){
+            removeIndex = 0;
+          }
+          this.set("myCheckbox."+removeIndex+".checked", false);
         }
         window.setTimeout(function() {
           this.loading = false;
-        }.bind(this), 800);
+        }.bind(this), 600);
       }
     }
 
