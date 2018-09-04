@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+
 <dom-module id="my-view1">
   <template>
     <style include="shared-styles">
@@ -19,16 +21,49 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
+
+      paper-checkbox {
+        font-family: 'Roboto', sans-serif;
+        margin: 24px;
+        display: block;
+      }
     </style>
 
     <div class="card">
-      
+
+      <template is="dom-repeat" items="{{myCheckbox}}">
+          <paper-checkbox checked={{item.checked}}>[[item.label]]</paper-checkbox>
+      </template>
+
     </div>
   </template>
 
   <script>
     class MyView1 extends Polymer.Element {
       static get is() { return 'my-view1'; }
+
+      static get properties() {
+       return {
+          myCheckbox: {
+              type: Object,
+              notify: true,
+              value: [
+                {
+                  label: "Reliable",
+                  checked:  false,
+                },
+                {
+                  label: "Cheap",
+                  checked:  false,
+                },
+                {
+                  label: "Fast",
+                  checked:  false,
+                },
+              ]
+          },
+        }
+      }
     }
 
     window.customElements.define(MyView1.is, MyView1);
